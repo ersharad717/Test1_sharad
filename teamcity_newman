@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('POSTMAN Tests') {
+            steps {
+                bat label: '', script: 'newman run C:\\Users\\sharadku\\Desktop\\Newman\\HMRC.postman_collection.json --reporters htmlextra'
+                }
+        }
+    }
+}
