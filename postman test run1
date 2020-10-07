@@ -1,0 +1,2 @@
+cd C:\Users\sharadku\AppData\Roaming\npm
+newman run https://www.getpostman.com/collections/e8551424bbaa20ad7b9d

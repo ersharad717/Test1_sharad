@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "0929c722-fa6e-4bc7-9b7f-122b459da413",
+		"name": "HMRC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HMRC Hello World",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b772b22c-d31f-4d68-848e-8cd6255700d1",
+						"exec": [
+							"      pm.sendRequest(\"https://test-api.service.hmrc.gov.uk/hello/world\", function (err,response){console.log(response.json());\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"tests[\"Successfull POST request\"]=responseCode.code===200 || 201;\r",
+							"\r",
+							"pm.test(\"Response content-type is present\", function(){\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Accept is present\", function() {\r",
+							"      pm.request.to.have.header(\"Accept\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header content-type is present\", function() {\r",
+							"      pm.request.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"tests[\"Response time is less than 1000000ms\"]=responseTime<1000000;\r",
+							"\r",
+							"\r",
+							"var time = responseTime;\r",
+							"\r",
+							"console.log(time);\r",
+							"\r",
+							"tests[\"Response time is less than 1000000ms\"]= time<1000000;\r",
+							"\r",
+							"var XXX= JSON.parse(responseBody);\r",
+							"console.log(XXX);\r",
+							"\r",
+							"var YYY = XXX.message;\r",
+							"\r",
+							"console.log(YYY);\r",
+							"\r",
+							"\r",
+							"tests[\"Body matches message\"] = pm.expect(YYY).to.eql(\"Hello World\")\r",
+							"\r",
+							"tests[\"Body matches loanAmount\"] = responseBody.has(\"Hello World\");\r",
+							"\r",
+							"var ttt = pm.info.requestName;\r",
+							"console.log(ttt);\r",
+							"\r",
+							"var UUU = pm.info.iterationCount\r",
+							"console.log(UUU);\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.hmrc.1.0+json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://test-api.service.hmrc.gov.uk/hello/world",
+					"protocol": "https",
+					"host": [
+						"test-api",
+						"service",
+						"hmrc",
+						"gov",
+						"uk"
+					],
+					"path": [
+						"hello",
+						"world"
+					]
+				},
+				"description": "HMRC"
+			},
+			"response": []
+		},
+		{
+			"name": "https://www.w3schools.com/xml/tempconvert.asmx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76652619-2e5c-4302-be1d-a89d97724e6f",
+						"exec": [
+							"pm.sendRequest(\"https://www.w3schools.com/xml/tempconvert.asmx\", function (err,responseBody){console.log(responseBody);",
+							"    ",
+							"});",
+							"",
+							"var xyz = xml2Json(responseBody);",
+							"",
+							"var YYY = xyz [\"soap:Envelope\"][\"soap:Body\"][\"FahrenheitToCelsiusResponse\"][\"FahrenheitToCelsiusResult\"]",
+							"",
+							"tests[\"Body matches Result\"] = pm.expect(YYY).to.eql(\"37.7777777777778\")",
+							"console.log(YYY)",
+							"",
+							"tests[\"Body matches response status code\"]= responseCode.code===200;",
+							"tests[\"Body matches response time\"]= responseTime<20000;",
+							"pm.test(\"Request body have header is Content-Type\"), function(){",
+							"    pm.request.to.have.header(\"Content-Type\")",
+							"};",
+							"pm.test(\"Response body have header is Content-Type\"), function(){",
+							"    pm.response.to.have.header(\"Content-Type\")",
+							"};",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "\"https://www.w3schools.com/xml/FahrenheitToCelsius\"",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n   <FahrenheitToCelsius xmlns=\"https://www.w3schools.com/xml/\">\r\n     <Fahrenheit>100</Fahrenheit>\r\n   </FahrenheitToCelsius>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://www.w3schools.com/xml/tempconvert.asmx",
+					"protocol": "https",
+					"host": [
+						"www",
+						"w3schools",
+						"com"
+					],
+					"path": [
+						"xml",
+						"tempconvert.asmx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ddf876e4-a76e-4da3-979b-405fb84c4fc4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4999750-cccd-4a8a-a7a9-3730b23855d6",
+						"exec": [
+							"console.log(\"id that will be sent: \" + data.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  { \"id\": 3643, \"summary\": \"Wash car\" },\r\n  { \"id\": 3697, \"summary\": \"Visit gym\" },\r\n  { \"id\": 3792, \"summary\": \"Get milk\" }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://www.w3schools.com/xml/tempconvert.asmx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76652619-2e5c-4302-be1d-a89d97724e6f",
+						"exec": [
+							"pm.sendRequest(\"https://www.w3schools.com/xml/tempconvert.asmx\", function (err,responseBody){console.log(responseBody);",
+							"    ",
+							"});",
+							"",
+							"var xyz = xml2Json(responseBody);",
+							"console.log(xyz);",
+							"",
+							"var YYY = xyz [\"soap:Envelope\"][\"soap:Body\"][\"FahrenheitToCelsiusResponse\"][\"FahrenheitToCelsiusResult\"]",
+							"console.log(YYY)",
+							"tests[\"Body matches Result\"] = pm.expect(YYY).to.eql(\"37.7777777777778\")",
+							"",
+							"",
+							"tests[\"Body matches response status code\"]= responseCode.code===200;",
+							"tests[\"Body matches response time\"]= responseTime<20000;",
+							"pm.test(\"Request body have header is Content-Type\"), function(){",
+							"    pm.request.to.have.header(\"Content-Type\")",
+							"};",
+							"pm.test(\"Response body have header is Content-Type\"), function(){",
+							"    pm.response.to.have.header(\"Content-Type\")",
+							"};",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "SOAPAction",
+						"value": "\"https://www.w3schools.com/xml/FahrenheitToCelsius\"",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n   <FahrenheitToCelsius xmlns=\"https://www.w3schools.com/xml/\">\r\n     <Fahrenheit>100</Fahrenheit>\r\n   </FahrenheitToCelsius>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://www.w3schools.com/xml/tempconvert.asmx",
+					"protocol": "https",
+					"host": [
+						"www",
+						"w3schools",
+						"com"
+					],
+					"path": [
+						"xml",
+						"tempconvert.asmx"
+					]
+				},
+				"description": "XML"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

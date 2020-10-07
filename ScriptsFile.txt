@@ -1,0 +1,18 @@
+node('master') {
+  stage('Build') {
+    echo 'make'
+  }
+  stage('SCM Checkout') {
+    echo 'QA'
+    git 'https://github.com/ersharad717/TeamCity_Newman.git'
+  }
+ 
+ stage('Test') {
+  bat label: '', script: 'newman run C:\\work\\TeamCity_Newman\\HMRC.postman_collection.json --reporters htmlextra'
+  }
+
+ stage('Deploy') {
+   echo 'make publish'
+ }
+}
+  
